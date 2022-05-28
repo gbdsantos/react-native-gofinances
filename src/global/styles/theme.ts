@@ -15,5 +15,11 @@ export default {
     title: '#363F5F',
     text: '#969CB2',
     background: '#F0F2F5'
+  },
+  
+  fonts: {
+    bold: 'Poppins_700Bold',
+    medium: 'Poppins_500Medium',
+    regular: 'Poppins_400Regular',
   }
 }
