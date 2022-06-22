@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { 
+import {
   Container,
   Title,
   Amount,
@@ -21,6 +21,7 @@ interface Data {
   category: Category;
   date: string;
   title: string;
+  type: 'income' | 'outcome';
 }
 
 interface Props {
@@ -31,10 +32,15 @@ export function TransactionCard({ data }: Props) {
   return (
     <Container>
       <Title>{data.title}</Title>
-      <Amount>{data.amount}</Amount>
+
+      <Amount type={data.type}>
+        { data.type === 'outcome' && '-' }
+        { data.amount }
+      </Amount>
+
       <Footer>
         <Category>
-          <Icon name="dollar-sign"/>
+          <Icon name={data.category.icon} />
           <CategoryName>{data.category.name}</CategoryName>
         </Category>
 

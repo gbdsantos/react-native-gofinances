@@ -4,7 +4,7 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { HighlightCard } from '../../components/HighlightCard';
 import { TransactionCard } from '../../components/TransactionCard';
 
-import { 
+import {
   Container,
   Header,
   UserWrapper,
@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 export function Dashboard(){
-  const date = new Date().getDate(); 
+  const date = new Date().getDate();
   const month = new Date().getMonth() + 1;
   const year = new Date().getFullYear();
 
@@ -35,25 +35,28 @@ export function Dashboard(){
         icon:'dollar-sign',
         name: "vendas"
       },
-      title: "Desenvolvimento de site"
+      title: "Desenvolvimento de site",
+      type: 'income'
     },
     {
-      amount: "R$ 12.000,00",
+      amount: "R$ 59,29",
       date: currentDate,
       category: {
         icon:'dollar-sign',
-        name: "vendas"
+        name: "alimentação"
       },
-      title: "Desenvolvimento de site"
+      title: "Hamburgueria Ohana",
+      type: 'outcome'
     },
     {
-      amount: "R$ 12.000,00",
+      amount: "R$ 1.200,00",
       date: currentDate,
       category: {
         icon:'dollar-sign',
-        name: "vendas"
+        name: "casa"
       },
-      title: "Desenvolvimento de site"
+      title: "Aluguel do apartamento",
+      type: 'outcome'
     }
   ]
 
@@ -62,8 +65,8 @@ export function Dashboard(){
       <Header>
         <UserWrapper>
           <UserInfo>
-            <Photo 
-              source={{ uri: 'https://avatars.githubusercontent.com/u/21063343?v=4' }} 
+            <Photo
+              source={{ uri: 'https://avatars.githubusercontent.com/u/21063343?v=4' }}
             />
             <User>
               <UserGreeting>Olá,</UserGreeting>
@@ -78,29 +81,29 @@ export function Dashboard(){
       <HighlightCards
 
       >
-        <HighlightCard 
-          amount="R$ 17.400,00" 
-          lastTransaction="Última entrada dia 01 de junho" 
-          title="Entradas"  
+        <HighlightCard
+          amount="R$ 17.400,00"
+          lastTransaction="Última entrada dia 01 de junho"
+          title="Entradas"
           type="income"
         />
-        <HighlightCard 
-          amount="R$ 1.259,00" 
-          lastTransaction="Última entrada dia 03 de junho" 
-          title="Saídas" 
-          type="outcome" 
+        <HighlightCard
+          amount="R$ 1.259,00"
+          lastTransaction="Última entrada dia 03 de junho"
+          title="Saídas"
+          type="outcome"
         />
-        <HighlightCard 
-          amount="R$ 16.141,00" 
-          lastTransaction="01 à 06 de junho" 
-          title="Total" 
-          type="total" 
+        <HighlightCard
+          amount="R$ 16.141,00"
+          lastTransaction="01 à 06 de junho"
+          title="Total"
+          type="total"
         />
       </HighlightCards>
 
       <Transactions>
         <Title>Listagem</Title>
-        <TransactionList 
+        <TransactionList
           data={data}
           contentContainerStyle={{
             paddingBottom: getBottomSpace()
@@ -108,7 +111,7 @@ export function Dashboard(){
           renderItem={ ({ item }) => <TransactionCard data={item} /> }
           showsVerticalScrollIndicator={false}
         />
-        
+
       </Transactions>
     </Container>
   );
