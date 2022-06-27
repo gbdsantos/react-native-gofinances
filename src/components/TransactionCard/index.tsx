@@ -34,7 +34,7 @@ export function TransactionCard({ data }: Props) {
       <Title>{data.title}</Title>
 
       <Amount type={data.type}>
-        { data.type === 'outcome' && '-' }
+        { data.type === 'outcome' && '- ' }
         { data.amount }
       </Amount>
 

@@ -42,7 +42,7 @@ export function Dashboard(){
       amount: "R$ 59,29",
       date: currentDate,
       category: {
-        icon:'dollar-sign',
+        icon:'coffee',
         name: "alimentação"
       },
       title: "Hamburgueria Ohana",
@@ -52,7 +52,7 @@ export function Dashboard(){
       amount: "R$ 1.200,00",
       date: currentDate,
       category: {
-        icon:'dollar-sign',
+        icon:'shopping-bag',
         name: "casa"
       },
       title: "Aluguel do apartamento",
