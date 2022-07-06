@@ -6,7 +6,6 @@ import { Button } from '../../components/Form/Button';
 import { categories } from '../../utils/categories';
 
 import {
-  ButtonText,
   Category,
   Container,
   Footer,
@@ -23,7 +22,7 @@ interface Category {
 }
 
 interface Props {
-  category: string;
+  category: Category;
   closeSelectCategory: () => void;
   setCategory: (category: Category) => void;
 }
@@ -33,6 +32,10 @@ export function CategorySelect({
   closeSelectCategory,
   setCategory
 }: Props){
+  function handleCategorySelect(category: Category) {
+    setCategory(category);
+  }
+
   return (
     <Container>
       <Header>
@@ -44,7 +47,10 @@ export function CategorySelect({
         keyExtractor={ (item) => item.key }
         ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => (
-          <Category>
+          <Category
+            isActive={category.key === item.key}
+            onPress={() => handleCategorySelect(item)}
+          >
             <Icon name={item.icon} />
             <Name>{item.name}</Name>
           </Category>
@@ -53,7 +59,10 @@ export function CategorySelect({
       />
 
       <Footer>
-        <Button title="Selecionar" />
+        <Button
+          title="Selecionar"
+          onPress={closeSelectCategory}
+        />
       </Footer>
     </Container>
   );
