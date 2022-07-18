@@ -1,8 +1,14 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'; 
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { ReactNode } from 'react';
+
+type LogoutButtonProps = {
+  children: ReactNode;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -13,16 +19,16 @@ export const UserWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  
+
   margin-top: ${getStatusBarHeight() + RFValue(28)}px;
   padding: 0 24px;
-  
+
   width: 100%;
 `;
 
 export const Header = styled.View`
   background-color: ${({ theme }) => theme.colors.primary };
-  
+
   align-items: flex-start;
   justify-content: center;
   flex-direction: row;
@@ -60,6 +66,8 @@ export const UserName = styled.Text`
   font-size: ${RFValue(18)}px;
 `;
 
+export const LogoutButton = styled(BorderlessButton)<LogoutButtonProps>``;
+
 export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary };
   font-size: ${RFValue(24)}px;
@@ -80,7 +88,7 @@ export const Transactions = styled.View`
   flex: 1;
   margin-top: ${RFPercentage(12)}px;
   padding: 0 24px;
-`; 
+`;
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular };
