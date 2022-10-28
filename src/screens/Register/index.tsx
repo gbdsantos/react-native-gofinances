@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Keyboard,
@@ -7,9 +7,11 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../../components/Form/Button';
 import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
@@ -42,6 +44,10 @@ const schema = Yup.object().shape({
     .positive('O valor não pode ser negativo')
 });
 
+type NavigationProps = {
+  navigate: (screen: string) => void;
+}
+
 export function Register() {
   const [category, setCategory] = useState({
     key: 'category',
@@ -54,11 +60,13 @@ export function Register() {
   const {
     control,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    reset
   } = useForm({
     resolver: yupResolver(schema)
   });
 
+  const { navigate } = useNavigation<NavigationProps>();
   const collectionKey = '@gofinances:transactions';
 
   function handleTransactionsTypesSelect(type: 'up' | 'down') {
@@ -82,7 +90,9 @@ export function Register() {
       return Alert.alert('Selcione a categoria');
     }
 
-    const data = {
+    const newTransaction = {
+      id: String(uuid.v4()),
+      date: new Date(),
       name: form.name,
       amount: form.amount,
       transactionType,
@@ -90,25 +100,30 @@ export function Register() {
     }
 
     try {
-      await AsyncStorage.setItem(collectionKey, JSON.stringify(data));
+      const localStorageData = await AsyncStorage.getItem(collectionKey);
+      const parsedData = localStorageData ? JSON.parse(localStorageData) : [];
 
+      const dataFormatted = [
+        ...parsedData,
+        newTransaction
+      ]
+
+      await AsyncStorage.setItem(collectionKey, JSON.stringify(dataFormatted));
+
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria'
+      });
+
+      navigate('Listagem');
 
     } catch (error) {
       console.log(error);
       Alert.alert('Erro', 'Não foi possível salve');
     }
   }
-
-
-
-  useEffect(() => {
-    async function loadLocalStorage() {
-      const localStorageData = await AsyncStorage.getItem(collectionKey);
-      console.log('[LOCAL STORAGE]:', JSON.parse(localStorageData!));
-    }
-
-    loadLocalStorage();
-  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
