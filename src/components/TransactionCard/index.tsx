@@ -11,31 +11,31 @@ import {
   Date
 } from './styles';
 
-interface Category {
+interface CategoryProps {
   icon: string;
   name: string;
 }
 
 interface Data {
   amount: string;
-  category: Category;
+  category: CategoryProps;
   date: string;
-  title: string;
+  name: string;
   type: 'income' | 'outcome';
 }
 
-interface Props {
+export interface TransactionCardProps {
   data: Data;
 }
 
-export function TransactionCard({ data }: Props) {
+export function TransactionCard({ data }: TransactionCardProps) {
   return (
     <Container>
-      <Title>{data.title}</Title>
+      <Title>{data.name}</Title>
 
       <Amount type={data.type}>
-        { data.type === 'outcome' && '- ' }
-        { data.amount }
+        {data.type === 'outcome' && '- '}
+        {data.amount}
       </Amount>
 
       <Footer>

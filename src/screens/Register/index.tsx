@@ -67,7 +67,6 @@ export function Register() {
   });
 
   const { navigate } = useNavigation<NavigationProps>();
-  const collectionKey = '@gofinances:transactions';
 
   function handleTransactionsTypesSelect(type: 'up' | 'down') {
     setTransactionType(type);
@@ -100,6 +99,8 @@ export function Register() {
     }
 
     try {
+      const collectionKey = '@gofinances:transactions';
+
       const localStorageData = await AsyncStorage.getItem(collectionKey);
       const parsedData = localStorageData ? JSON.parse(localStorageData) : [];
 

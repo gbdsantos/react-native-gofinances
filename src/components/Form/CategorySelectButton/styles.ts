@@ -11,17 +11,17 @@ export const Container = styled(RectButton).attrs({
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${ ({ theme }) => theme.colors.shape };
+  background-color: ${({ theme }) => theme.colors.shape};
   border-radius: 5px;
   padding: 18px 16px;
 `;
 
 export const Category = styled.Text`
-  font-family: ${ ({ theme }) => theme.fonts.regular };
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(14)}px;
 `;
 
-export const Icon = styled(Feather)`
-  color: ${ ({ theme }) => theme.colors.text };
+export const Icon = styled<any>(Feather)`
+  color: ${({ theme }) => theme.colors.text};
   font-size: ${RFValue(20)}px;
 `;
